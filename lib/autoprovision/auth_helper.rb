@@ -30,7 +30,7 @@ class AuthHelper
 
   def get_developer_portal_data(build_url, build_api_token)
     portal_data_json = ENV['BITRISE_PORTAL_DATA_JSON']
-    Log.debug(portal_data_json)
+    Log.debug("Getting portal data")
     unless portal_data_json.nil?
       developer_portal_data = JSON.parse(portal_data_json)
       return AuthData.new(developer_portal_data)
@@ -54,6 +54,8 @@ class AuthHelper
     raise 'failed to get response' unless response
     raise 'response has no body' unless response.body
 
+    Log.debug("Data:")
+    Log.debug(response.body)
     developer_portal_data = JSON.parse(response.body)
 
     unless response.code == '200'
