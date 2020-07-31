@@ -40,6 +40,7 @@ module Portal
         unless registered_test_device
           new_device_registered = true
           begin
+            Log.debug("Unregistered device #{test_device.name} (#{test_device.udid})")
             registered_test_device = device_client.create!(name: test_device.name, udid: test_device.udid)
           rescue Spaceship::Client::UnexpectedResponse => ex
             message = result_string(ex)
